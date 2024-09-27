@@ -1,7 +1,6 @@
 package util;
 
 import controllers.Program;
-
 import controllers.RAMList;
 import controllers.SubMenu;
 import dto.I_Program;
@@ -15,6 +14,7 @@ public class Service {
         submenu2.addItem("| 2. Search by Bus                                |");
         submenu2.addItem("| 3. Search by Brand                              |");
         submenu2.addItem("| 4. Return to Main Menu                          |");
+        submenu2.addItem(" -------------------------------------------------");
         submenu2.showMenu();
 
         int subChoice = submenu2.getChoice();
@@ -29,11 +29,11 @@ public class Service {
                 subMenu.searchByBrand(ramList);
                 break;
             case 4:
-                // Có thể không cần xử lý gì ở đây, vì đã quay về menu chính
+                // Quay về menu chính
                 break;
             default:
                 System.out.println("Invalid choice! Please try again.");
+                searchMenu(subMenu, ramList);
         }
     }
-
 }

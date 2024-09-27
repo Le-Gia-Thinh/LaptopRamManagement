@@ -2,6 +2,7 @@ package controllers;
 
 import dto.I_List;
 import dto.RAMItem;
+import util.Sort;
 import util.Util;
 
 import java.io.*;
@@ -47,26 +48,21 @@ public class RAMList extends ArrayList<RAMItem> implements I_List {
 
     @Override
     public void update() {
-        String code = Util.getString("Enter the RAM code to update: ");
-        int index = checkExist(code);
+        String code = Util.getString("Enter the RAM item code to update: ");
 
+        int index = checkExist(code);
         if (index == -1) {
-            System.out.println("Error: RAM item not found.");
+            System.out.println("RAM item with the specified code does not exist.");
             return;
         }
 
         RAMItem item = this.get(index);
-        String newType = Util.getString("Enter new RAM Type (leave blank to keep current): ");
-        if (!newType.isEmpty()) item.setType(newType);
+        System.out.printf("Current Information: %s%n", item.toString());
 
-        int newBus = Util.getInt("Enter new RAM Bus Speed (leave blank to keep current, or input -1): ");
-        if (newBus >= 0) item.setBus(String.valueOf(newBus));
-
-        String newBrand = Util.getString("Enter new RAM Brand (leave blank to keep current): ");
-        if (!newBrand.isEmpty()) item.setBrand(newBrand);
-
-        int newQuantity = Util.getInt("Enter new RAM Quantity (leave blank to keep current, or input -1): ");
-        if (newQuantity >= 0) item.setQuantity(newQuantity);
+        item.setType(Util.updateString("Enter new RAM Type (leave empty to retain current): ", item.getType()));
+        item.setBus(Util.updateString("Enter new RAM Bus Speed (leave empty to retain current): ", item.getBus()));
+        item.setBrand(Util.updateString("Enter new RAM Brand (leave empty to retain current): ", item.getBrand()));
+        item.setQuantity(Util.updateInt("Enter new Quantity (leave empty to retain current): ", item.getQuantity()));
 
         System.out.println("RAM item updated successfully!");
     }
@@ -96,7 +92,9 @@ public class RAMList extends ArrayList<RAMItem> implements I_List {
                 activeItems.add(item);
             }
         }
-        activeItems.sort(Comparator.comparing(RAMItem::getType).thenComparing(RAMItem::getBus).thenComparing(RAMItem::getBrand));
+
+        //Sort items by Type then Bus and finally Brand
+        activeItems.sort(Sort.sortByType().thenComparing(Sort.sortByBus()).thenComparing(Sort.sortByBrand()));
 
         System.out.println("Active RAM Items:");
         for (RAMItem item : activeItems) {
@@ -108,7 +106,7 @@ public class RAMList extends ArrayList<RAMItem> implements I_List {
     @Override
     public void loadFromFile() {
         File file = new File("RAMModules.dat");
-        System.out.println("Loading data from: " + file.getAbsolutePath()); // Hiển thị đường dẫn
+        System.out.println("Loading data from: " + file.getAbsolutePath());
         if (!file.exists()) {
             System.out.println("File not found. Starting with an empty list.");
             return;
@@ -129,7 +127,7 @@ public class RAMList extends ArrayList<RAMItem> implements I_List {
     @Override
     public void saveToFile() {
         File file = new File("RAMModules.dat");
-        System.out.println("Saving data to: " + file.getAbsolutePath()); // Hiển thị đường dẫn
+        System.out.println("Saving data to: " + file.getAbsolutePath());
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
             for (RAMItem item : this) {
                 if (item.isActive()) {

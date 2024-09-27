@@ -11,5 +11,5 @@ public interface I_SubMenu {
 
     void searchByBus (RAMList ramList);
 
-    void displaySearchResults(List<RAMItem> results, String searchCriteria);
+    void displaySearchResults(List<RAMItem> results, String searchCriteria, String type);
 }
