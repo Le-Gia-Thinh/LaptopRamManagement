@@ -1,15 +1,15 @@
 package dto;
 
-import controllers.RamList;
+import controllers.RAMList;
 
 import java.util.List;
 
 public interface I_SubMenu {
-    void searchByType(RamList ramList);
+    void searchByType(RAMList ramList);
 
-    void searchByBrand(RamList ramList);
+    void searchByBrand(RAMList ramList);
 
-    void searchByBus (RamList ramList);
+    void searchByBus (RAMList ramList);
 
-    void displaySearchResults(List<RamItem> results, String searchCriteria);
+    void displaySearchResults(List<RAMItem> results, String searchCriteria);
 }

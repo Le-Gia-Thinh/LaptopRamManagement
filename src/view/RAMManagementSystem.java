@@ -1,16 +1,16 @@
 package view;
 
 import controllers.Program;
-import controllers.RamList;
+import controllers.RAMList;
 import controllers.SubMenu;
 import util.Util;
 import util.Service;
 
-public class RamManagementSystem {
+public class RAMManagementSystem {
 
     public static void main(String[] args) {
         Program menu = new Program();
-        RamList ramList = new RamList();
+        RAMList ramList = new RAMList();
         ramList.loadFromFile();
 
         SubMenu subMenu = new SubMenu();

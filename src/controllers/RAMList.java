@@ -1,7 +1,7 @@
 package controllers;
 
 import dto.I_List;
-import dto.RamItem;
+import dto.RAMItem;
 import util.Util;
 
 import java.io.*;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Comparator;
 
-public class RamList extends ArrayList<RamItem> implements I_List {
+public class RAMList extends ArrayList<RAMItem> implements I_List {
 
     public int checkExist(String code) {
         for (int i = 0; i < this.size(); i++) {
@@ -35,7 +35,7 @@ public class RamList extends ArrayList<RamItem> implements I_List {
         int quantity = Util.getInt("Enter RAM Quantity: ");
         String productionDate = Util.getString("Enter Production Month/Year: ");
 
-        RamItem newItem = new RamItem(code, name, type, bus, brand, quantity, productionDate, true);
+        RAMItem newItem = new RAMItem(code, name, type, bus, brand, quantity, productionDate, true);
         this.add(newItem);
         System.out.println("RAM item added successfully!");
 
@@ -55,7 +55,7 @@ public class RamList extends ArrayList<RamItem> implements I_List {
             return;
         }
 
-        RamItem item = this.get(index);
+        RAMItem item = this.get(index);
         String newType = Util.getString("Enter new RAM Type (leave blank to keep current): ");
         if (!newType.isEmpty()) item.setType(newType);
 
@@ -90,16 +90,16 @@ public class RamList extends ArrayList<RamItem> implements I_List {
 
     @Override
     public void displayAll() {
-        List<RamItem> activeItems = new ArrayList<>();
-        for (RamItem item : this) {
+        List<RAMItem> activeItems = new ArrayList<>();
+        for (RAMItem item : this) {
             if (item.isActive()) {
                 activeItems.add(item);
             }
         }
-        activeItems.sort(Comparator.comparing(RamItem::getType).thenComparing(RamItem::getBus).thenComparing(RamItem::getBrand));
+        activeItems.sort(Comparator.comparing(RAMItem::getType).thenComparing(RAMItem::getBus).thenComparing(RAMItem::getBrand));
 
         System.out.println("Active RAM Items:");
-        for (RamItem item : activeItems) {
+        for (RAMItem item : activeItems) {
             System.out.printf("Code: %s, Type: %s, Bus: %s, Brand: %s, Quantity: %d, Production Date: %s%n",
                     item.getCode(), item.getType(), item.getBus(), item.getBrand(), item.getQuantity(), item.getProductionMonthYear());
         }
@@ -116,7 +116,7 @@ public class RamList extends ArrayList<RamItem> implements I_List {
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             while (true) {
-                RamItem item = (RamItem) ois.readObject();
+                RAMItem item = (RAMItem) ois.readObject();
                 this.add(item);
             }
         } catch (EOFException e) {
@@ -131,7 +131,7 @@ public class RamList extends ArrayList<RamItem> implements I_List {
         File file = new File("RAMModules.dat");
         System.out.println("Saving data to: " + file.getAbsolutePath()); // Hiển thị đường dẫn
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
-            for (RamItem item : this) {
+            for (RAMItem item : this) {
                 if (item.isActive()) {
                     oos.writeObject(item);
                 }

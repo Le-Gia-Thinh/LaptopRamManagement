@@ -2,7 +2,7 @@ package dto;
 
 import java.io.Serializable;
 
-public class RamItem implements Serializable {
+public class RAMItem implements Serializable {
     private String code;
     private String type;
     private String bus;
@@ -11,7 +11,7 @@ public class RamItem implements Serializable {
     private String productionMonthYear;
     private boolean active;
 
-    public RamItem(String code, String type, String bus, String brand, String s, int quantity, String productionMonthYear, boolean b) {
+    public RAMItem(String code, String type, String bus, String brand, String s, int quantity, String productionMonthYear, boolean b) {
         this.code = code;
         this.type = type;
         this.bus = bus;

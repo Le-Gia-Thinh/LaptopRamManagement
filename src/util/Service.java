@@ -2,12 +2,12 @@ package util;
 
 import controllers.Program;
 
-import controllers.RamList;
+import controllers.RAMList;
 import controllers.SubMenu;
 import dto.I_Program;
 
 public class Service {
-    public static void searchMenu(SubMenu subMenu, RamList ramList) {
+    public static void searchMenu(SubMenu subMenu, RAMList ramList) {
         I_Program submenu2 = new Program();
         submenu2.addItem("|               RAM Search Menu                  |");
         submenu2.addItem(" -------------------------------------------------");
