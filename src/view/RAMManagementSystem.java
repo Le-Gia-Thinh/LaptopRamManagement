@@ -11,10 +11,7 @@ public class RAMManagementSystem {
     public static void main(String[] args) {
         Program menu = new Program();
         RAMList ramList = new RAMList();
-        ramList.loadFromFile();
-
         SubMenu subMenu = new SubMenu();
-
         menu.addItem("-------------------------------------------------");
         menu.addItem("|             RAM Management System               |");
         menu.addItem("-------------------------------------------------");

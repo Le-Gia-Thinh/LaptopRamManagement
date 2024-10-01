@@ -1,7 +1,6 @@
 package util;
 
 import dto.RAMItem;
-
 import java.util.Comparator;
 
 public class Sort {

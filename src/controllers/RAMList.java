@@ -2,13 +2,14 @@ package controllers;
 
 import dto.I_List;
 import dto.RAMItem;
+import util.Service;
 import util.Sort;
 import util.Util;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Comparator;
+
 
 public class RAMList extends ArrayList<RAMItem> implements I_List {
 
@@ -30,8 +31,8 @@ public class RAMList extends ArrayList<RAMItem> implements I_List {
         }
 
         String name = Util.getString("Enter RAM Name: ");
-        String type = Util.getString("Enter RAM Type (e.g., LPDDR5, DDR5, LPDDR4, DDR4): ");
-        String bus = Util.getString("Enter RAM Bus Speed (MHz): ");
+        String type = Service.TypeMenu("Enter RAM Type: ");
+        String bus = Service.BusMenu("Enter RAM Bus: ");
         String brand = Util.getString("Enter RAM Brand: ");
         int quantity = Util.getInt("Enter RAM Quantity: ");
         String productionDate = Util.getString("Enter Production Month/Year: ");
@@ -59,8 +60,8 @@ public class RAMList extends ArrayList<RAMItem> implements I_List {
         RAMItem item = this.get(index);
         System.out.printf("Current Information: %s%n", item.toString());
 
-        item.setType(Util.updateString("Enter new RAM Type (leave empty to retain current): ", item.getType()));
-        item.setBus(Util.updateString("Enter new RAM Bus Speed (leave empty to retain current): ", item.getBus()));
+        item.setType(Service.TypeMenu("Enter new RAM Type (leave empty to retain current): "));
+        item.setBus(Service.BusMenu("Enter new RAM Bus Speed (leave empty to retain current): "));
         item.setBrand(Util.updateString("Enter new RAM Brand (leave empty to retain current): ", item.getBrand()));
         item.setQuantity(Util.updateInt("Enter new Quantity (leave empty to retain current): ", item.getQuantity()));
 

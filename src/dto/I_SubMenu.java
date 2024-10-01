@@ -9,7 +9,7 @@ public interface I_SubMenu {
 
     void searchByBrand(RAMList ramList);
 
-    void searchByBus (RAMList ramList);
+    void searchByBus(RAMList ramList);
 
     void displaySearchResults(List<RAMItem> results, String searchCriteria, String type);
 }
