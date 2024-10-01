@@ -2,6 +2,7 @@ package controllers;
 
 import dto.I_SubMenu;
 import dto.RAMItem;
+import util.Service;
 import util.Util;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class SubMenu extends ArrayList<RAMItem> implements I_SubMenu {
 
     @Override
     public void searchByType(RAMList ramList) {
-        String type = Util.getString("Enter RAM Type to search: ");
+        String type = Service.TypeMenu("Enter RAM Type to search: ");
         List<RAMItem> results = new ArrayList<>();
         for (RAMItem item : ramList) {
             if (item.getType().equalsIgnoreCase(type)) {
@@ -21,6 +22,20 @@ public class SubMenu extends ArrayList<RAMItem> implements I_SubMenu {
             }
         }
         displaySearchResults(results, "Type: " + type, "type");
+        returnToMainMenu(this, ramList);
+    }
+
+    @Override
+    public void searchByBus(RAMList ramList) {
+        String bus = Service.BusMenu("Enter RAM Bus Speed to search: ");
+        List<RAMItem> results = new ArrayList<>();
+        for (RAMItem item : ramList) {
+            if (item.getBus().equalsIgnoreCase(bus)) {
+                results.add(item);
+            }
+        }
+        displaySearchResults(results, "Bus Speed: " + bus + " MHz", "bus");
+        returnToMainMenu(this, ramList);
     }
 
     @Override
@@ -33,19 +48,9 @@ public class SubMenu extends ArrayList<RAMItem> implements I_SubMenu {
             }
         }
         displaySearchResults(results, "Brand: " + brand, "brand");
+        returnToMainMenu(this, ramList);
     }
 
-    @Override
-    public void searchByBus(RAMList ramList) {
-        int bus = Util.getInt("Enter RAM Bus Speed (MHz) to search: ");
-        List<RAMItem> results = new ArrayList<>();
-        for (RAMItem item : ramList) {
-            if (Integer.parseInt(item.getBus()) == bus) {
-                results.add(item);
-            }
-        }
-        displaySearchResults(results, "Bus Speed: " + bus + " MHz", "bus");
-    }
 
     @Override
     public void displaySearchResults(List<RAMItem> results, String searchCriteria, String type) {
@@ -80,4 +85,15 @@ public class SubMenu extends ArrayList<RAMItem> implements I_SubMenu {
             }
         }
     }
+    public void returnToMainMenu(SubMenu subMenu, RAMList ramList) {
+        if (Util.confirmYesNo("Do you want to return to the main menu? (y = yes /n = no )")) {
+            Program menu = new Program();
+            menu.showMenu();
+        } else {
+            System.out.println("Continuing the search...");
+            Service.searchMenu(subMenu, ramList);
+        }
+    }
+
 }
+

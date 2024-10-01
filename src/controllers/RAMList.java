@@ -10,7 +10,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class RAMList extends ArrayList<RAMItem> implements I_List {
 
     public int checkExist(String code) {
@@ -37,12 +36,11 @@ public class RAMList extends ArrayList<RAMItem> implements I_List {
         int quantity = Util.getInt("Enter RAM Quantity: ");
         String productionDate = Util.getString("Enter Production Month/Year: ");
 
-        RAMItem newItem = new RAMItem(code, name, type, bus, brand, quantity, productionDate, true);
+        RAMItem newItem = new RAMItem(code, type, bus, brand, quantity, productionDate, true);
         this.add(newItem);
         System.out.println("RAM item added successfully!");
 
-        // Prompt to continue adding or return to main menu
-        if (Util.confirmYesNo("Do you want to add another item? (yes/no)")) {
+        if (Util.confirmYesNo("Do you want to add another item? (y = yes /n = no )")) {
             addItem();
         }
     }
@@ -77,7 +75,7 @@ public class RAMList extends ArrayList<RAMItem> implements I_List {
             System.out.println("Error: RAM item not found.");
             return;
         }
-        if (Util.confirmYesNo("Are you sure you want to delete this item? (yes/no)")) {
+        if (Util.confirmYesNo("Are you sure you want to delete this item? (y = yes /n = no )")) {
             this.get(index).setActive(false);
             System.out.println("RAM item marked as inactive.");
         } else {
@@ -94,7 +92,7 @@ public class RAMList extends ArrayList<RAMItem> implements I_List {
             }
         }
 
-        //Sort items by Type then Bus and finally Brand
+        // Sort items by Type then Bus and finally Brand
         activeItems.sort(Sort.sortByType().thenComparing(Sort.sortByBus()).thenComparing(Sort.sortByBrand()));
 
         System.out.println("Active RAM Items:");

@@ -10,19 +10,17 @@ public class RAMItem implements Serializable {
     private int quantity;
     private String productionMonthYear;
     private boolean active;
-
-    public RAMItem(String code, String type, String bus, String brand, String s, int quantity, String productionMonthYear, boolean b) {
+    public RAMItem(String code, String type, String bus, String brand, int quantity, String productionMonthYear, boolean active) {
         this.code = code;
         this.type = type;
         this.bus = bus;
         this.brand = brand;
         this.quantity = quantity;
         this.productionMonthYear = productionMonthYear;
-        this.active = true;
+        this.active = active;
     }
 
-
-
+    // Getter và Setter
     public String getCode() {
         return code;
     }
@@ -85,5 +83,3 @@ public class RAMItem implements Serializable {
                 code, type, bus, brand, quantity, productionMonthYear, active ? "Yes" : "No");
     }
 }
-
-
