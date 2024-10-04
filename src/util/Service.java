@@ -1,3 +1,5 @@
+// The Service class manages search menus and submenus for RAM Type and RAM Bus input.
+// It also handles calling the respective search methods based on user input.
 package util;
 
 import controllers.Program;
@@ -8,7 +10,10 @@ import dto.I_Program;
 
 public class Service {
 
+    // The searchMenu method displays the main search menu for RAM.
+    // It allows users to search RAM by type, bus, or brand.
     public static void searchMenu(SubMenu subMenu, RAMList ramList) {
+        // Create a menu using I_Program (interface) to add menu items.
         I_Program subMenu_1 = new Program();
         subMenu_1.addItem("|               RAM Search Menu                  |");
         subMenu_1.addItem(" -------------------------------------------------");
@@ -19,25 +24,28 @@ public class Service {
         subMenu_1.addItem(" -------------------------------------------------");
         subMenu_1.showMenu();
 
+        // Get the user's choice and call the appropriate search method.
         int subChoice = subMenu_1.getChoice();
         switch(subChoice) {
             case 1:
-                subMenu.searchByType(ramList);
+                subMenu.searchByType(ramList);  // Calls search by type method.
                 break;
             case 2:
-                subMenu.searchByBus(ramList);
+                subMenu.searchByBus(ramList);   // Calls search by bus method.
                 break;
             case 3:
-                subMenu.searchByBrand(ramList);
+                subMenu.searchByBrand(ramList); // Calls search by brand method.
                 break;
             case 4:
-                break;
+                break;  // Exits the search menu and returns to the main menu.
             default:
-                System.out.println("Invalid choice! Please try again.");
-                searchMenu(subMenu, ramList);
+                System.out.println("Invalid choice! Please try again.");  // Error handling for invalid input.
+                searchMenu(subMenu, ramList);  // Recursively calls the method again for a valid input.
         }
     }
 
+    // The TypeMenu method displays the RAM Type selection menu and returns the selected type.
+    // If the user selects "Others", they can manually enter a new RAM type.
     public static String TypeMenu(String welcome ) {
         System.out.println(welcome);
         I_Program subMenu_2 = new Program();
@@ -51,15 +59,19 @@ public class Service {
         subMenu_2.addItem("| 6. Others: please enter type which you want      |");
         subMenu_2.showMenu();
 
+        // Get the user's choice.
         int choice = subMenu_2.getChoice();
-        Enum.Type type = Enum.Type.fromMenuChoice(choice);
+        Enum.Type type = Enum.Type.fromMenuChoice(choice);  // Maps the user's choice to a Type enum.
         if (type == null) {
+            // If the user selects "Others", prompt them to enter a custom RAM type.
             return Util.getString("Enter new RAM Type: ");
         }
-        return type.name();
+        return type.name();  // Returns the name of the selected RAM type.
     }
 
-    public static String BusMenu(String welcome ) {
+    // The BusMenu method displays the RAM Bus selection menu and returns the selected bus speed.
+    // If the user selects "N/A", they can manually enter a custom bus speed.
+    public static String BusMenu(String welcome) {
         System.out.println(welcome);
         I_Program subMenu_3 = new Program();
         subMenu_3.addItem("|               RAM Bus Menu                       |");
@@ -73,11 +85,30 @@ public class Service {
         subMenu_3.addItem("| 7. N/A: please enter bus which you want          |");
         subMenu_3.showMenu();
 
+        // Get the user's choice.
         int choice = subMenu_3.getChoice();
-        Enum.Bus bus = Enum.Bus.fromMenuChoice(choice);
+        Enum.Bus bus = Enum.Bus.fromMenuChoice(choice);  // Maps the user's choice to a Bus enum.
         if (bus == null) {
+            // If the user selects "N/A", prompt them to enter a custom bus speed.
             return Util.getString("Enter new RAM Bus Speed: ");
         }
-        return bus.name().replace("MHz", "MHz");
+        return bus.toString();  // Returns the string representation of the selected bus speed.
+    }
+
+    // SORT Menu for show all RAM product
+    public static int displaySortMenu() {
+        I_Program sortMenu = new Program();
+        sortMenu.addItem("|               Sort Menu                          |");
+        sortMenu.addItem(" -------------------------------------------------");
+        sortMenu.addItem("| 1. Sort by Type                                  |");
+        sortMenu.addItem("| 2. Sort by Bus                                   |");
+        sortMenu.addItem("| 3. Sort by Brand                                 |");
+        sortMenu.addItem("| 4. Return to Previous Menu                       |");
+        sortMenu.addItem(" -------------------------------------------------");
+        sortMenu.showMenu();
+
+        // Get the user's choice.
+        return sortMenu.getChoice();
     }
 }
+

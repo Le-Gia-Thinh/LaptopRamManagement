@@ -8,15 +8,15 @@ public class RAMItem implements Serializable {
     private String bus;
     private String brand;
     private int quantity;
-    private String productionMonthYear;
+    private String production_month_year;
     private boolean active;
-    public RAMItem(String code, String type, String bus, String brand, int quantity, String productionMonthYear, boolean active) {
+    public RAMItem(String code, String type, String bus, String brand, int quantity, String production_month_year, boolean active) {
         this.code = code;
         this.type = type;
         this.bus = bus;
         this.brand = brand;
         this.quantity = quantity;
-        this.productionMonthYear = productionMonthYear;
+        this.production_month_year = production_month_year;
         this.active = active;
     }
 
@@ -61,12 +61,12 @@ public class RAMItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public String getProductionMonthYear() {
-        return productionMonthYear;
+    public String getProduction_month_year() {
+        return production_month_year;
     }
 
-    public void setProductionMonthYear(String productionMonthYear) {
-        this.productionMonthYear = productionMonthYear;
+    public void setProduction_month_year(String production_month_year) {
+        this.production_month_year = production_month_year;
     }
 
     public boolean isActive() {
@@ -80,6 +80,6 @@ public class RAMItem implements Serializable {
     @Override
     public String toString() {
         return String.format("Code: %s | Type: %s | Bus: %s | Brand: %s | Quantity: %d | Production Date: %s | Active: %s",
-                code, type, bus, brand, quantity, productionMonthYear, active ? "Yes" : "No");
+                code, type, bus, brand, quantity, production_month_year, active ? "Yes" : "No");
     }
 }

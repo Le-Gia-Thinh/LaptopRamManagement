@@ -23,7 +23,6 @@ public class RAMManagementSystem {
         menu.addItem("| 6. Save Data to File                             |");
         menu.addItem("| 7. Exit                                          |");
         menu.addItem("-------------------------------------------------");
-        ramList.loadFromFile();
         int choice;
         do {
             menu.showMenu();

@@ -19,7 +19,23 @@ public class Enum {
 
 
     public enum Bus {
-        MHz1600, MHz2333, MHz2666, MHz3200, MHz4800, MHz5600;
+        MHz1600("1600MHz"),
+        MHz2333("2333MHz"),
+        MHz2666("2666MHz"),
+        MHz3200("3200MHz"),
+        MHz4800("4800MHz"),
+        MHz5600("5600MHz");
+
+        private final String busName;
+
+        // Constructor
+        Bus(String busName) {
+            this.busName = busName;
+        }
+        @Override
+        public String toString() {
+            return busName;
+        }
 
         public static Bus fromMenuChoice(int choice) {
             switch (choice) {
@@ -33,4 +49,5 @@ public class Enum {
             }
         }
     }
+
 }
