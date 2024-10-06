@@ -124,6 +124,9 @@ public class RAMList extends ArrayList<RAMItem> implements I_List {
         }
 
         System.out.println("Active RAM Items:");
+        if (activeItems.isEmpty()){
+            System.out.println("Not Ram Items is available");
+        }
         for (RAMItem item : activeItems) {
             System.out.printf("Code: %s, Type: %s, Bus: %s, Brand: %s, Quantity: %d, Production Date: %s%n",
                     item.getCode(), item.getType(), item.getBus(), item.getBrand(), item.getQuantity(), item.getProduction_month_year());

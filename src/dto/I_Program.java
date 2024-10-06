@@ -1,12 +1,12 @@
-package dto;
+    package dto;
 
-public interface I_Program {
+    public interface I_Program {
 
-    void addItem(String s);
+        void addItem(String s);
 
-    int getChoice();
+        int getChoice();
 
-    void showMenu();
+        void showMenu();
 
-    boolean confirmYesNo(String welcome);
-}
+        boolean confirmYesNo(String welcome);
+    }
